@@ -17,12 +17,6 @@ public class product {
         this.productQuantity = productQuantity;
         this.productInstock = productInstock;
 
-        if(productQuantity > 0){
-            productInstock = true;
-        }
-        else{
-            productInstock = false;
-        }
     }
 
     public String getProductName() {
