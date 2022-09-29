@@ -3,9 +3,8 @@ package UI;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import GUI.*;
 import objects.accounts.*;
-import Swing.registrationForm;
 
 public class login {
 
@@ -20,7 +19,7 @@ public class login {
     // account creation method, uses other methods to  retrieve a username, password and email from user and checks validity of each
 
     public static void makeAccount() {
-        String newUserName = getInput("please input your first name");
+        String newUserName =  ;
         String newUserEmail = getEmail();
         String newUserPassword = getPassword();
         String newUserRole = getInput("is this an admin or staff account");
