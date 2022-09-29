@@ -5,14 +5,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import objects.accounts.*;
+import Swing.registrationForm;
 
 public class login {
+
+
+    //a general purpose method to retrieve a string from user input
 
     public static String getInput(String prompt) {
         System.out.println(prompt);
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
+    // account creation method, uses other methods to  retrieve a username, password and email from user and checks validity of each
 
     public static void makeAccount() {
         String newUserName = getInput("please input your first name");
@@ -25,6 +30,7 @@ public class login {
             new staffAccount(newUserEmail, newUserName, newUserPassword, "staff");
         }
     }
+    // asks user if they already have an account and wish to sign in or create a new account
 
     public static boolean hasAccount() {
         while (true) {
@@ -42,7 +48,7 @@ public class login {
             }
         }
     }
-
+    // gets the email and password of the user attempting login
 
     public static void getID() {
         String emailInput = getInput("please enter your email");
@@ -50,6 +56,8 @@ public class login {
 
 
     }
+
+    //retrieves email from user for account creation, checks validity of email
 
     public static String getEmail() {
         while (true) {
@@ -61,6 +69,8 @@ public class login {
             }
         }
     }
+
+    // retrieves password from user, checks security of password
 
     public static String getPassword() {
 

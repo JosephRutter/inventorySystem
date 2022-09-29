@@ -8,8 +8,8 @@ public class clerkMenu {
             System.out.println("welcome");
             while (leave = false) {
                 String clerkMenuChoice = login.getInput("would you like to: manage inventory, or log out?");
-
                 switch (clerkMenuChoice) {
+
                     case ("inventory"):
                         inventory.inventoryMenu();
                         break;
