@@ -17,9 +17,13 @@ public class login {
         return input.nextLine();
     }
     // account creation method, uses other methods to  retrieve a username, password and email from user and checks validity of each
+public static String getUsername(){
+     String username =   getInput("please enter your first name");
+        return username;
+}
 
     public static void makeAccount() {
-        String newUserName =  ;
+        String newUserName = getUsername() ;
         String newUserEmail = getEmail();
         String newUserPassword = getPassword();
         String newUserRole = getInput("is this an admin or staff account");

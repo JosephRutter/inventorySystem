@@ -13,6 +13,8 @@ public class registrationForm {
     private JTextField textField1;
     private JButton nextButton;
 
+
+
      String firstName = enterFirstNameTextArea.getText();
     String surname = enterSurnameTextArea.getText();
     String password = enterPasswordTextArea.getText();
