@@ -7,10 +7,10 @@ public class clerkMenu {
             boolean leave = false;
             System.out.println("welcome");
             while (leave = false) {
-                String clerkMenuChoice = login.getInput("would you like to: manage inventory, or log out?");
+                String clerkMenuChoice = login.getInput("would you like to: manage UI.inventory, or log out?");
                 switch (clerkMenuChoice) {
 
-                    case ("inventory"):
+                    case ("UI.inventory"):
                         inventory.inventoryMenu();
                         break;
 

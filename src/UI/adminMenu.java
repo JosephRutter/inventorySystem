@@ -6,10 +6,10 @@ public class adminMenu {
         boolean leave = false;
         System.out.println("welcome admin");
         while (leave = false) {
-            String adminMenuChoice = login.getInput("would you like to: manage inventory,manage user profiles,manage restock settings or log out?");
+            String adminMenuChoice = login.getInput("would you like to: manage UI.inventory,manage user profiles,manage restock settings or log out?");
 
             switch (adminMenuChoice) {
-                case ("inventory"):
+                case ("UI.inventory"):
                     inventory.inventoryMenu();
                     break;
 
