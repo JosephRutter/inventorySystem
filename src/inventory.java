@@ -1,6 +1,12 @@
-package UI;
+import UI.login;
+import objects.product;
 
-public class inventory {
+import java.io.*;
+import java.util.Scanner;
+
+public class  inventory {
+
+    public static File inventory = new File("inventory.txt");
 
     public static void inventoryMenu() {
 
@@ -11,7 +17,7 @@ public class inventory {
             switch (inventoryMenuChoice) {
 
                 case ("add"):
-
+                        addStock();
                     break;
                 case ("edit"):
 
@@ -27,5 +33,16 @@ public class inventory {
             }
 
         }
+
+
     }
+   public static void addStock() {
+       Scanner input = new Scanner(System.in);
+       System.out.println("please enter the product name, its category, its price , quantity in that order");
+       product tempProduct =  new product(input.next(), input.next(), input.nextDouble(),input.nextInt(), true );
+       if (tempProduct.getProductQuantity() == 0 ){
+           tempProduct.setProductInstock(false);
+       }
+       Main.currentInventory.add(tempProduct);
+   }
 }
