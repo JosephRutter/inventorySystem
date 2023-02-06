@@ -29,6 +29,9 @@ public class Main {
             login.makeAccount();
         }
 
+        inventoryToTxt();
+        accsToTxt();
+
     }
 
     public static void createInventory(){
@@ -73,6 +76,24 @@ public class Main {
          }catch (FileNotFoundException e){
              e.printStackTrace();
          }
+
+    }
+
+    public static void accsToTxt() {
+        try {
+            FileWriter cleaner = new FileWriter(accs,false);
+            FileWriter writer = new FileWriter(accs,true);
+            cleaner.write("");
+            cleaner.close();
+            for (account acc : currentAccs){
+               writer.write(acc.toString());
+            } writer.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void inventoryToTxt(){
 
     }
 }
