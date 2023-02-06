@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import GUI.*;
-import objects.accounts.*;
+import objects.account.*;
 
 public class login {
 
@@ -28,9 +28,9 @@ public static String getUsername(){
         String newUserPassword = getPassword();
         String newUserRole = getInput("is this an admin or staff account");
         if (newUserRole.equals("admin")) {
-            new staffAccount(newUserEmail, newUserName, newUserPassword, "admin");
+            new objects.account(newUserEmail, newUserName, newUserPassword, true);
         } else {
-            new staffAccount(newUserEmail, newUserName, newUserPassword, "staff");
+            new objects.account(newUserEmail, newUserName, newUserPassword, false);
         }
     }
     // asks user if they already have an account and wish to sign in or create a new account
