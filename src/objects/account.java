@@ -1,7 +1,7 @@
 package objects;
 
 public class account {
-    public account(String email, String username, String password, boolean isAdmin) {
+    public account(String email, String username, int password, boolean isAdmin) {
         this.email = email;
         this.username = username;
         this.password = password;
@@ -24,11 +24,11 @@ public class account {
         this.username = username;
     }
 
-    public String getPassword() {
+    public int getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(int password) {
         this.password = password;
     }
 
@@ -44,7 +44,7 @@ public class account {
 
     private String username;
 
-    private String password;
+    private int password;
 
     private boolean isAdmin;
 

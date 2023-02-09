@@ -3,7 +3,6 @@ package UI;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import GUI.*;
 import objects.account.*;
 
 public class login {
@@ -26,11 +25,12 @@ public static String getUsername(){
         String newUserName = getUsername() ;
         String newUserEmail = getEmail();
         String newUserPassword = getPassword();
+       int hashedPassword = newUserPassword.hashCode();
         String newUserRole = getInput("is this an admin or staff account");
         if (newUserRole.equals("admin")) {
-            new objects.account(newUserEmail, newUserName, newUserPassword, true);
+            new objects.account(newUserEmail, newUserName, hashedPassword, true);
         } else {
-            new objects.account(newUserEmail, newUserName, newUserPassword, false);
+            new objects.account(newUserEmail, newUserName, hashedPassword, false);
         }
     }
     // asks user if they already have an account and wish to sign in or create a new account
@@ -56,7 +56,19 @@ public static String getUsername(){
     public static void getID() {
         String emailInput = getInput("please enter your email");
         String passwordInput = getInput("please enter your password");
+        for(int i = 0 ; i< Main.currentAccs.size(); i++){
+            if(Main.currentAccs.get(i).getPassword() == passwordInput.hashCode() && Main.currentAccs.get(i).getEmail() == emailInput){
+                System.out.println("welcome "+ Main.currentAccs.get(i).getUsername());
+                if(Main.currentAccs.get(i).isAdmin()){
+                    adminMenu.adminMainMenu();
+                }else{
+                    clerkMenu.clerkMainMenu();
+                }
 
+            }else{
+                System.out.println("that is not a correct username/password combination , please try again");
+            }
+        }
 
     }
 

@@ -1,99 +1,111 @@
 package UI;
 
 import objects.*;
-import UI.*;
-import GUI.*;
+
 import java.io.*;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import java.util.Objects;
+
 import java.util.Scanner;
 
 public class Main {
-       public static  ArrayList<product> currentInventory = new ArrayList<>();
 
-       public static  ArrayList<account> currentAccs = new ArrayList<>();
+    //lists used here to track current inventory and accounts, before saving them to txt file when program ends
+    public static ArrayList<product> currentInventory = new ArrayList<>();
 
-        public static File accs = new File ("accs.txt");
+    public static ArrayList<account> currentAccs = new ArrayList<>();
 
-    public static void main(String[] args) {
+
+
+    public static void main(String[] args) throws FileNotFoundException {
         createInventory();
+        createAccs();
         inventoryToTemp();
         accsToTemp();
 
 
-        if( login.hasAccount()){
+        if (login.hasAccount()) {
             login.getID();
-        } else{
+        } else {
             login.makeAccount();
         }
+
+
 
         inventoryToTxt();
         accsToTxt();
 
     }
 
-    public static void createInventory(){
+    public static void createInventory() {
         try {
-            if (inventory.inventory.createNewFile()) {
-                System.out.println("inventory successfully created");
-            } else {
-                System.out.println("file already exists");
+            File inventory = new File ("inventory.txt");
+            if(inventory.createNewFile()){
+                System.out.println("inventory created");
+            } else{
+                System.out.println("inventory already exists");
             }
-        } catch (IOException e) {
-            System.out.println("an error occurred");
+        }catch (IOException e){
+            System.out.println("an error occured");
             e.printStackTrace();
-
         }
     }
 
-    public static void inventoryToTemp(){
-        try{
-            Scanner scanner = new Scanner(inventory.inventory);
-            scanner.useDelimiter("~");
-            if(inventory.inventory.length() != 0){
-                while (scanner.hasNextLine()){
-                    currentInventory.add(new product(scanner.next(), scanner.next(), scanner.nextDouble(), scanner.nextInt(), scanner.nextBoolean()));
-
-                }
+    public static void createAccs(){
+        try {
+            File inventory = new File ("accs.txt");
+            if(inventory.createNewFile()){
+                System.out.println("accs created");
+            } else{
+                System.out.println("accs already exists");
             }
-        }catch (FileNotFoundException e){
+        }catch (IOException e){
+            System.out.println("an error occured");
             e.printStackTrace();
+        }
+    }
+
+
+
+    public static void inventoryToTemp() throws FileNotFoundException {
+        Scanner scanner = new Scanner("inventory.txt");
+        scanner.useDelimiter("~");
+        if ("inventory.txt".length() != 0) {
+            while (scanner.hasNextLine()) {
+                currentInventory.add(new product(scanner.next(), scanner.next(), scanner.nextDouble(), scanner.nextInt(), scanner.nextBoolean()));
+
+            }
         }
 
     }
 
 
-    public static void accsToTemp() {
-         try {
-             Scanner scanner = new Scanner(accs);
-             scanner.useDelimiter("~");
-             while(scanner.hasNextLine()){
-                 currentAccs.add(new account(scanner.next(), scanner.next(), scanner.next(), scanner.hasNextBoolean()));
-             }
-
-         }catch (FileNotFoundException e){
-             e.printStackTrace();
-         }
+    public static void accsToTemp() throws FileNotFoundException {
+        Scanner scanner = new Scanner("accs.txt");
+        scanner.useDelimiter("~");
+        while (scanner.hasNextLine()) {
+            currentAccs.add(new account(scanner.next(), scanner.next(), scanner.nextInt(), scanner.hasNextBoolean()));
+        }
 
     }
 
     public static void accsToTxt() {
         try {
-            FileWriter cleaner = new FileWriter(accs,false);
-            FileWriter writer = new FileWriter(accs,true);
+            FileWriter cleaner = new FileWriter("accs.txt", false);
+            FileWriter writer = new FileWriter("accs.txt", true);
             cleaner.write("");
             cleaner.close();
-            for (account acc : currentAccs){
-               writer.write(acc.toString());
-            } writer.close();
-        }catch (IOException e){
+            for (account acc : currentAccs) {
+                writer.write(acc.toString());
+            }
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void inventoryToTxt(){
+    public static void inventoryToTxt() {
 
     }
 }

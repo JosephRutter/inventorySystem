@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class  inventory {
 
-    public static File inventory = new File("UI.inventory.txt");
 
     public static void inventoryMenu() {
 
