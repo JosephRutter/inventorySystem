@@ -7,9 +7,13 @@ import java.io.*;
 
 import java.util.ArrayList;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
+
+    public static File inventory = new File("inventory.txt");
+    public static File accs = new File ("accs.txt");
 
     //lists used here to track current inventory and accounts, before saving them to txt file when program ends
     public static ArrayList<product> currentInventory = new ArrayList<>();
@@ -19,8 +23,11 @@ public class Main {
 
 
     public static void main(String[] args) throws FileNotFoundException {
-        createInventory();
         createAccs();
+        createInventory();
+
+
+
         inventoryToTemp();
         accsToTemp();
 
@@ -29,6 +36,7 @@ public class Main {
             login.getID();
         } else {
             login.makeAccount();
+            login.getID();
         }
 
 
@@ -38,21 +46,23 @@ public class Main {
 
     }
 
+
+
     public static void createInventory() {
         try {
-            File inventory = new File ("inventory.txt");
-            if(inventory.createNewFile()){
+            File inventory = new File("inventory.txt");
+            if (inventory.createNewFile()) {
                 System.out.println("inventory created");
-            } else{
+            } else {
                 System.out.println("inventory already exists");
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("an error occured");
             e.printStackTrace();
-        }
-    }
+        } }
 
     public static void createAccs(){
+
         try {
             File inventory = new File ("accs.txt");
             if(inventory.createNewFile()){
@@ -67,29 +77,35 @@ public class Main {
     }
 
 
+    public static void inventoryToTemp() {
+        try {
+            Scanner scanner = new Scanner("inventory.txt");
+            scanner.useDelimiter("~");
+            if ((inventory.length() != 0)) {
+                while (scanner.hasNextLine()) {
+                    currentInventory.add(new product(scanner.next(), scanner.next(), scanner.nextDouble(), scanner.nextInt(), scanner.nextBoolean()));
 
-    public static void inventoryToTemp() throws FileNotFoundException {
-        Scanner scanner = new Scanner("inventory.txt");
-        scanner.useDelimiter("~");
-        if ("inventory.txt".length() != 0) {
-            while (scanner.hasNextLine()) {
-                currentInventory.add(new product(scanner.next(), scanner.next(), scanner.nextDouble(), scanner.nextInt(), scanner.nextBoolean()));
-
+                }
             }
-        }
 
+        }catch (NoSuchElementException e){
+            e.printStackTrace();
+        }
     }
 
+    public static void accsToTemp() {
+        try {
+            Scanner scanner = new Scanner("accs.txt");
+            scanner.useDelimiter("~");
+            if((accs.length() != 0)){
+            while (scanner.hasNextLine()) {
+                currentAccs.add(new account(scanner.next(), scanner.next(), scanner.nextInt(), scanner.hasNextBoolean()));
+            }}
 
-    public static void accsToTemp() throws FileNotFoundException {
-        Scanner scanner = new Scanner("accs.txt");
-        scanner.useDelimiter("~");
-        while (scanner.hasNextLine()) {
-            currentAccs.add(new account(scanner.next(), scanner.next(), scanner.nextInt(), scanner.hasNextBoolean()));
+        }catch (NoSuchElementException e){
+            e.printStackTrace();
         }
-
     }
-
     public static void accsToTxt() {
         try {
             FileWriter cleaner = new FileWriter("accs.txt", false);

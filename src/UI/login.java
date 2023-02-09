@@ -28,9 +28,9 @@ public static String getUsername(){
        int hashedPassword = newUserPassword.hashCode();
         String newUserRole = getInput("is this an admin or staff account");
         if (newUserRole.equals("admin")) {
-            new objects.account(newUserEmail, newUserName, hashedPassword, true);
+           Main.currentAccs.add( new objects.account(newUserEmail, newUserName, hashedPassword, true));
         } else {
-            new objects.account(newUserEmail, newUserName, hashedPassword, false);
+            Main.currentAccs.add(new objects.account(newUserEmail, newUserName, hashedPassword, false));
         }
     }
     // asks user if they already have an account and wish to sign in or create a new account
