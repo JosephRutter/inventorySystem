@@ -60,9 +60,9 @@ public static String getUsername(){
         while (x == true) {
             String emailInput = getInput("please enter your email");
             String passwordInput = getInput("please enter your password");
-            String hashedInput = String.valueOf(passwordInput.hashCode());
+            int hashedInput = passwordInput.hashCode();
             for (account currentAcc : Main.currentAccs) {
-                if (currentAcc.toString().contains(emailInput) && currentAcc.toString().contains(hashedInput)) {
+                if (currentAcc.toString().contains(emailInput) && currentAcc.getPassword() == hashedInput) {
                     System.out.println("welcome " + currentAcc.getUsername());
                     if (currentAcc.isAdmin()) {
                         adminMenu.adminMainMenu();
