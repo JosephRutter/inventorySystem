@@ -3,6 +3,8 @@ package UI;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import objects.account;
 import objects.account.*;
 
 public class login {
@@ -54,24 +56,31 @@ public static String getUsername(){
     // gets the email and password of the user attempting login
 
     public static void getID() {
-        String emailInput = getInput("please enter your email");
-        String passwordInput = getInput("please enter your password");
-        for(int i = 0 ; i< Main.currentAccs.size(); i++){
-            if(Main.currentAccs.get(i).getPassword() == passwordInput.hashCode() && Main.currentAccs.get(i).getEmail() == emailInput){
-                System.out.println("welcome "+ Main.currentAccs.get(i).getUsername());
-                if(Main.currentAccs.get(i).isAdmin()){
-                    adminMenu.adminMainMenu();
-                }else{
-                    clerkMenu.clerkMainMenu();
+        boolean x = true;
+        while (x == true) {
+            String emailInput = getInput("please enter your email");
+            String passwordInput = getInput("please enter your password");
+            String hashedInput = String.valueOf(passwordInput.hashCode());
+            for (account currentAcc : Main.currentAccs) {
+                if (currentAcc.toString().contains(emailInput) && currentAcc.toString().contains(hashedInput)) {
+                    System.out.println("welcome " + currentAcc.getUsername());
+                    if (currentAcc.isAdmin()) {
+                        adminMenu.adminMainMenu();
+                        x = false;
+                        break;
+                    } else {
+                        clerkMenu.clerkMainMenu();
+                        x = false;
+                        break;
+                    }
+
+                } else {
+                    System.out.println("that is not a correct username/password combination , please try again");
                 }
-
-            }else{
-                System.out.println("that is not a correct username/password combination , please try again");
             }
+
         }
-
     }
-
     //retrieves email from user for account creation, checks validity of email
 
     public static String getEmail() {
